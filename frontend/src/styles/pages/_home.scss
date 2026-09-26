@@ -1,0 +1,13 @@
+//styles/pages/home
+.fondo {
+    background-image: url('/fondo/montañas_nevadas.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 540px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
