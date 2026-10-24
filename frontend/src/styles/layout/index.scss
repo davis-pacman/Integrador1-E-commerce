@@ -1,3 +1,5 @@
 //layout/index.scss
+//@use '../base/typography' as *;
+
 @forward './header';
 @forward './footer';

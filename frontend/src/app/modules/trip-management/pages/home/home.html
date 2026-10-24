@@ -1,6 +1,123 @@
 <div>
     <div class="fondo">
         <h1>Descubre tu próximo destino</h1>
-        <p>Vuela a las mejores playas, lagos y montañas con la flota más nueva del continente</p>
+        <div class="sky-search-container">
+            <!-- Pestañas superiores -->
+            <div class="sky-tabs">
+                <button class="sky-tab">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />
+                    </svg>
+                    Vuelos
+                </button>
+            </div>
+
+            <!-- Opciones de tipo de viaje -->
+            <div class="sky-trip-type">
+                <label class="sky-radio-label">
+                    <input type="radio" name="trip_type" value="roundtrip" checked>
+                    <span class="radio-custom"></span>
+                    Ida y vuelta
+                </label>
+                <label class="sky-radio-label">
+                    <input type="radio" name="trip_type" value="oneway">
+                    <span class="radio-custom"></span>
+                    Solo ida
+                </label>
+            </div>
+
+            <!-- Campos del formulario -->
+            <div class="sky-form-fields">
+                <div class="sky-field-box">
+                    <span class="sky-field-label">ORIGEN</span>
+                    <input type="text" class="sky-field-input" placeholder="Desde">
+                </div>
+
+                <div class="sky-field-box">
+                    <span class="sky-field-label">DESTINO</span>
+                    <input type="text" class="sky-field-input" placeholder="Hacia">
+                </div>
+
+                <div class="sky-field-box">
+                    <span class="sky-field-label">FECHAS</span>
+                    <input type="text" class="sky-field-input">
+                </div>
+
+                <div class="sky-field-box">
+                    <span class="sky-field-label">PASAJEROS</span>
+                    <input type="text" class="sky-field-input" placeholder="PASAJEROS">
+                </div>
+
+                <button type="submit" class="sky-search-btn">Buscar vuelos</button>
+            </div>
+        </div>
     </div>
 </div>
+
+<section class="quick-management">
+    <h2 class="quick-management__title">Gestiones rápidas</h2>
+
+    <div class="quick-management__grid">
+        <!-- Card 1: Check-in -->
+        <a href="#" class="quick-card">
+            <div class="quick-card__icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+            </div>
+            <h3 class="quick-card__title">Check-in</h3>
+            <p class="quick-card__description">
+                Realiza tu check-in en línea entre 48 y 2 horas antes de tu vuelo.
+            </p>
+        </a>
+
+        <!-- Card 2: Mis Viajes -->
+        <a href="#" class="quick-card">
+            <div class="quick-card__icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />
+                </svg>
+            </div>
+            <h3 class="quick-card__title">Mis Viajes</h3>
+            <p class="quick-card__description">
+                Administra tu reserva, elige asientos y compra equipaje adicional.
+            </p>
+        </a>
+
+        <!-- Card 3: Rastrear equipaje -->
+        <a href="#" class="quick-card">
+            <div class="quick-card__icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="6" y="6" width="12" height="14" rx="2"></rect>
+                    <path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path>
+                    <line x1="10" y1="10" x2="10" y2="16"></line>
+                    <line x1="14" y1="10" x2="14" y2="16"></line>
+                </svg>
+            </div>
+            <h3 class="quick-card__title">Rastrear equipaje</h3>
+            <p class="quick-card__description">
+                Monitorea la ubicación de tus maletas facturadas paso a paso.
+            </p>
+        </a>
+
+        <!-- Card 4: Centro de ayuda -->
+        <a href="#" class="quick-card">
+            <div class="quick-card__icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+            </div>
+            <h3 class="quick-card__title">Centro de ayuda</h3>
+            <p class="quick-card__description">
+                Resuelve tus dudas sobre equipajes, cancelaciones y reembolsos.
+            </p>
+        </a>
+    </div>
+</section>

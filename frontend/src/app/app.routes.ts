@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { Home } from './modules/trip-management/pages/home/home';
-import path from 'path';
 import { Login } from './modules/auth/pages/login/login';
 import { Register } from './modules/auth/pages/register/register';
 

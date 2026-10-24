@@ -1,0 +1,10 @@
+//base/reset
+// Reseteo global básico para eliminar los márgenes por defecto del navegador
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; // Evita barras de desplazamiento horizontal indeseadas
+    background-color: #f7f9fa; // Color de fondo típico para la página principal
+}
