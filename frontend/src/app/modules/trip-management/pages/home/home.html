@@ -14,67 +14,123 @@
             </div>
 
             <!-- Opciones de tipo de viaje -->
-            <div class="sky-trip-type">
-                <label class="sky-radio-label">
-                    <input type="radio" name="trip_type" value="roundtrip" [(ngModel)]="tripType"
-                        (change)="onTripTypeChange()">
-                    <span class="radio-custom"></span>
-                    Ida y vuelta
-                </label>
+            <form [formGroup]="searchForm" (ngSubmit)="onSubmit()" class="sky-search-container">
 
-                <label class="sky-radio-label">
-                    <input type="radio" name="trip_type" value="oneway" [(ngModel)]="tripType"
-                        (change)="onTripTypeChange()">
-                    <span class="radio-custom"></span>
-                    Solo ida
-                </label>
-            </div>
+                <!-- Tipos de Viaje -->
+                <div class="sky-trip-type">
+                    <label class="sky-radio-label">
+                        <input type="radio" formControlName="tripType" value="roundtrip" (change)="onTripTypeChange()">
+                        <span class="radio-custom"></span>
+                        Ida y vuelta
+                    </label>
 
-            <!-- Campos del formulario -->
-            <div class="sky-form-fields" [class.has-two-dates]="tripType === 'roundtrip'">
-
-                <div class="sky-field-box">
-                    <span class="sky-field-label">ORIGEN</span>
-                    <input type="text" class="sky-field-input" placeholder="Desde">
+                    <label class="sky-radio-label">
+                        <input type="radio" formControlName="tripType" value="oneway" (change)="onTripTypeChange()">
+                        <span class="radio-custom"></span>
+                        Solo ida
+                    </label>
                 </div>
 
-                <div class="sky-field-box">
-                    <span class="sky-field-label">DESTINO</span>
-                    <input type="text" class="sky-field-input" placeholder="Hacia">
-                </div>
+                <!-- Campos del formulario -->
+                <div class="sky-form-fields" [class.has-two-dates]="searchForm.get('tripType')?.value === 'roundtrip'">
 
-                <!-- CASO 1: IDA Y VUELTA (Usa Date Range Picker de Angular Material) -->
-                @if (tripType === 'roundtrip') {
-                <div class="sky-field-box sky-date-box" (click)="pickerRange.open()">
-                    <span class="sky-field-label">FECHAS</span>
-                    <mat-date-range-input [min]="minDate" [rangePicker]="pickerRange" class="sky-mat-range-input">
-                        <input matStartDate [(ngModel)]="departureDate" placeholder="Ida">
-                        <span class="date-separator">-</span>
-                        <input matEndDate [(ngModel)]="returnDate" placeholder="Vuelta">
-                    </mat-date-range-input>
-                    <mat-date-range-picker #pickerRange></mat-date-range-picker>
-                </div>
-                }
-
-                <!-- CASO 2: SOLO IDA (Usa Datepicker Individual de Angular Material) -->
-                @else {
-                <div class="sky-field-box sky-date-box" (click)="pickerSingle.open()">
-                    <span class="sky-field-label">FECHA IDA</span>
-                    <div class="sky-mat-single-input">
-                        <input matInput [matDatepicker]="pickerSingle" [min]="minDate" [(ngModel)]="departureDate"
-                            placeholder="Selecciona fecha" readonly>
+                    <!-- ORIGEN -->
+                    <div class="sky-field-box">
+                        <span class="sky-field-label">ORIGEN</span>
+                        <input type="text" formControlName="origin" class="sky-field-input" placeholder="Desde">
                     </div>
-                    <mat-datepicker #pickerSingle></mat-datepicker>
-                </div>
-                }
 
-                <div class="sky-field-box">
-                    <span class="sky-field-label">PASAJEROS</span>
-                    <input type="text" class="sky-field-input" placeholder="1 Adulto">
-                </div>
+                    <!-- DESTINO -->
+                    <div class="sky-field-box">
+                        <span class="sky-field-label">DESTINO</span>
+                        <input type="text" formControlName="destination" class="sky-field-input" placeholder="Hacia">
+                    </div>
 
-                <button type="submit" class="sky-search-btn">Buscar vuelos</button>
-            </div>
+                    <!-- CASO 1: IDA Y VUELTA -->
+                    @if (searchForm.get('tripType')?.value === 'roundtrip') {
+                    <div class="sky-field-box sky-date-box" (click)="pickerRange.open()">
+                        <span class="sky-field-label">FECHAS</span>
+                        <mat-date-range-input [min]="minDate" [rangePicker]="pickerRange" class="sky-mat-range-input">
+                            <input matStartDate formControlName="departureDate" placeholder="Ida">
+                            <span class="date-separator">-</span>
+                            <input matEndDate formControlName="returnDate" placeholder="Vuelta">
+                        </mat-date-range-input>
+                        <mat-date-range-picker #pickerRange></mat-date-range-picker>
+                    </div>
+                    }
+
+                    <!-- CASO 2: SOLO IDA -->
+                    @else {
+                    <div class="sky-field-box sky-date-box" (click)="pickerSingle.open()">
+                        <span class="sky-field-label">FECHA IDA</span>
+                        <div class="sky-mat-single-input">
+                            <input matInput [matDatepicker]="pickerSingle" [min]="minDate"
+                                formControlName="departureDate" placeholder="Selecciona fecha" readonly>
+                        </div>
+                        <mat-datepicker #pickerSingle></mat-datepicker>
+                    </div>
+                    }
+
+                    <!-- PASAJEROS CON SELECTOR DESPLEGABLE -->
+                    <div class="sky-field-box sky-passenger-box">
+                        <span class="sky-field-label">PASAJEROS</span>
+                        <input type="text" class="sky-field-input" [value]="passengerSummary"
+                            (click)="togglePassengerDropdown()" readonly>
+
+                        @if (showPassengerDropdown) {
+                        <div class="passenger-dropdown">
+                            <!-- Adultos -->
+                            <div class="passenger-row">
+                                <div class="passenger-info">
+                                    <span class="p-title">Adultos</span>
+                                    <span class="p-subtitle">Mayor a 14 años</span>
+                                </div>
+                                <div class="passenger-controls">
+                                    <button type="button" (click)="adjustPassenger('adults', -1)">-</button>
+                                    <span>{{ searchForm.get('adults')?.value }}</span>
+                                    <button type="button" (click)="adjustPassenger('adults', 1)">+</button>
+                                </div>
+                            </div>
+
+                            <!-- Niños -->
+                            <div class="passenger-row">
+                                <div class="passenger-info">
+                                    <span class="p-title">Niños</span>
+                                    <span class="p-subtitle">2 a 13 años</span>
+                                </div>
+                                <div class="passenger-controls">
+                                    <button type="button" (click)="adjustPassenger('children', -1)">-</button>
+                                    <span>{{ searchForm.get('children')?.value }}</span>
+                                    <button type="button" (click)="adjustPassenger('children', 1)">+</button>
+                                </div>
+                            </div>
+
+                            <!-- Infantes -->
+                            <div class="passenger-row">
+                                <div class="passenger-info">
+                                    <span class="p-title">Infantes</span>
+                                    <span class="p-subtitle">Menor de 2 años</span>
+                                </div>
+                                <div class="passenger-controls">
+                                    <button type="button" (click)="adjustPassenger('infants', -1)">-</button>
+                                    <span>{{ searchForm.get('infants')?.value }}</span>
+                                    <button type="button" (click)="adjustPassenger('infants', 1)">+</button>
+                                </div>
+                            </div>
+
+                            @if (!arePassengersValid) {
+                            <span class="error-msg">Debe haber al menos 1 adulto o niño.</span>
+                            }
+
+                            <button type="button" class="close-dropdown-btn"
+                                (click)="togglePassengerDropdown()">Listo</button>
+                        </div>
+                        }
+                    </div>
+
+                    <button type="submit" class="sky-search-btn">Buscar vuelos</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
