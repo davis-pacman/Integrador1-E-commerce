@@ -236,3 +236,89 @@
         margin: 0;
     }
 }
+
+.sky-passenger-box {
+    position: relative;
+    cursor: pointer;
+
+    .passenger-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 280px;
+        background: #fff;
+        border: 1px solid #ddd;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        border-radius: 8px;
+        padding: 16px;
+        z-index: 100;
+        margin-top: 5px;
+
+        .passenger-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+
+            .passenger-info {
+                display: flex;
+                flex-direction: column;
+
+                .p-title {
+                    font-weight: bold;
+                    font-size: 14px;
+                    color: #333;
+                }
+
+                .p-subtitle {
+                    font-size: 11px;
+                    color: #777;
+                }
+            }
+
+            .passenger-controls {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+
+                button {
+                    width: 28px;
+                    height: 28px;
+                    border: 1px solid #ccc;
+                    background: #f9f9f9;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    font-weight: bold;
+
+                    &:hover {
+                        background: #e0e0e0;
+                    }
+                }
+
+                span {
+                    min-width: 20px;
+                    text-align: center;
+                    font-weight: 600;
+                }
+            }
+        }
+
+        .error-msg {
+            color: #d9534f;
+            font-size: 11px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .close-dropdown-btn {
+            width: 100%;
+            background: #d91c24; // Rojo corporativo SKY
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    }
+}
